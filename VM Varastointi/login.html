@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kirjautuminen</title>
+  <style>
+    body { font-family: Segoe UI, sans-serif; background:#f5f5f5; margin:0; display:grid; place-items:center; height:100vh; }
+    .card { background:#fff; padding:24px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,.1); width: min(360px, 92vw); }
+    h1 { margin:0 0 12px; font-size:22px; }
+    input { width:100%; padding:10px; margin:6px 0 12px; border:1px solid #ccc; border-radius:8px; font-size:16px; }
+    button { width:100%; padding:10px; background:#007bff; color:#fff; border:none; border-radius:8px; font-size:16px; cursor:pointer; }
+    .error { color:#d00; margin-top:8px; min-height:20px; }
+    .hint { font-size:12px; color:#666; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Kirjaudu sisään</h1>
+    <input id="username" placeholder="Käyttäjätunnus" autocomplete="username"/>
+    <input id="password" type="password" placeholder="Salasana" autocomplete="current-password"/>
+    <button id="loginBtn">Kirjaudu</button>
+    <div class="error" id="err"></div>
+    <div class="hint">Demo: admin/admin123</div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>

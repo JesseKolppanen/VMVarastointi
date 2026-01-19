@@ -1,0 +1,128 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "password": "Vmvarastointi25",
+      "role": "admin"
+    },
+    {
+      "username": "testi",
+      "password": "testi",
+      "role": "user"
+    }
+  ],
+  "people": [
+    {
+      "id": "mht5shfrdvnskb",
+      "name": "Jesse"
+    },
+    {
+      "id": "mht6j4x46wni6w",
+      "name": "Ossi"
+    }
+  ],
+  "items": [
+    {
+      "id": "mht5vw349b9uco",
+      "name": "Onnenpyörä",
+      "category": "Tapahtumat",
+      "ownerId": null,
+      "addedAt": "11/10/2025, 3:11:54 PM",
+      "assignedAt": null,
+      "reservations": [
+        {
+          "date": "2025-12-03",
+          "userId": "mht5shfrdvnskb"
+        }
+      ]
+    },
+    {
+      "id": "mht5w01uwtc1de",
+      "name": "Tikapuugolf",
+      "category": "Tapahtumat",
+      "ownerId": null,
+      "addedAt": "11/10/2025, 3:12:00 PM",
+      "assignedAt": null,
+      "reservations": [
+        {
+          "date": "2025-12-03",
+          "userId": "mht5shfrdvnskb"
+        }
+      ]
+    },
+    {
+      "id": "mht5w7641zm9wp",
+      "name": "Hanoin torni",
+      "category": "Tapahtumat",
+      "ownerId": null,
+      "addedAt": "11/10/2025, 3:12:09 PM",
+      "assignedAt": null,
+      "reservations": [
+        {
+          "date": "2025-12-03",
+          "userId": "mht5shfrdvnskb"
+        }
+      ]
+    },
+    {
+      "id": "mht5wjfkb4amuc",
+      "name": "Tirehtöörin asu",
+      "category": "Tapahtumat",
+      "ownerId": null,
+      "addedAt": "11/10/2025, 3:12:25 PM",
+      "assignedAt": null,
+      "reservations": [
+        {
+          "date": "2025-12-03",
+          "userId": "mht5shfrdvnskb"
+        }
+      ]
+    },
+    {
+      "id": "mht5wwonm8mua8",
+      "name": "Käärmeispeli",
+      "category": "Tapahtumat",
+      "ownerId": null,
+      "addedAt": "11/10/2025, 3:12:42 PM",
+      "assignedAt": null,
+      "reservations": [
+        {
+          "date": "2025-12-03",
+          "userId": "mht5shfrdvnskb"
+        }
+      ]
+    },
+    {
+      "id": "mht5x4utf673px",
+      "name": "Numeromatto",
+      "category": "Tapahtumat",
+      "ownerId": null,
+      "addedAt": "11/10/2025, 3:12:52 PM",
+      "assignedAt": null,
+      "reservations": [
+        {
+          "date": "2025-12-03",
+          "userId": "mht5shfrdvnskb"
+        }
+      ]
+    },
+    {
+      "id": "mht6k8d3np099m",
+      "name": "Behringer Xenyx 802s",
+      "category": "Elektroniikka",
+      "ownerId": null,
+      "addedAt": "10.11.2025 klo 15.30.50",
+      "assignedAt": null,
+      "reservations": [
+        {
+          "date": "2025-11-10",
+          "userId": "mht6j4x46wni6w"
+        },
+        {
+          "date": "2025-11-11",
+          "userId": "mht5shfrdvnskb"
+        }
+      ]
+    }
+  ]
+}

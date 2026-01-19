@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Varastointisovellus</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 0; display: flex; height: 100vh; background:#f5f5f5;
+  }
+  #left, #right {
+    padding: 20px; box-sizing: border-box; height: 100vh; overflow-y: auto;
+  }
+  #left {
+    width: 40%; background:#ffffff; border-right: 2px solid #ddd; display:flex; flex-direction:column;
+  }
+  #right {
+    width: 60%; background:#fafafa;
+  }
+  h2 {
+    margin-top: 0;
+    color: #333;
+  }
+  input, select, button {
+    margin: 5px 0; padding: 8px; font-size: 1em; border-radius:4px; border:1px solid #ccc;
+  }
+  button {
+    cursor: pointer; border:none; color:#fff;
+  }
+  #addPersonBtn, #addItemBtn, #assignBtn {
+    background-color: #007bff;
+  }
+  #resetBtn {
+    background-color: #ff4d4d; margin-top: 10px;
+  }
+  .card {
+    background: #fdfdfd; border:1px solid #ddd; border-radius:6px; padding:10px; margin:5px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  .pill {
+    display:inline-block; padding:2px 8px; background:#007bff; color:white; border-radius:12px; font-size:0.8em; margin-left:5px;
+  }
+  #assignSection {
+    margin-top: 20px; display:flex; gap:5px; flex-wrap:wrap;
+  }
+  #assignSection select, #assignSection button {
+    flex:1;
+    min-width: 100px;
+  }
+  #rightItemList .card {
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  
+  #logoutBtn {
+  width: auto;
+  align-self: flex-start;
+  background: #555;
+  padding: 8px 14px;
+  border-radius: 6px;
+  margin-top: 10px;
+  height: auto;
+}
+
+  /* 🔹 Kalenterinappi */
+  .actions {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  #calendarBtn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  #calendarBtn:hover {
+    background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+
+<div id="left">
+  <h2>Henkilöt</h2>
+  <input id="personName" placeholder="Uusi henkilö">
+  <button id="addPersonBtn">Lisää henkilö</button>
+  <div id="peopleList"></div>
+
+  <h2>Tavarat</h2>
+  <input id="itemName" placeholder="Uusi tavara">
+  <select id="itemCategory">
+    <option value="Työkalut">Työkalut</option>
+    <option value="Elektroniikka">Elektroniikka</option>
+    <option value="Tapahtumat">Tapahtumat</option>
+    <option value="Tuotanto">Tuotanto</option>
+  </select>
+  <button id="addItemBtn">Lisää tavara</button>
+  <div id="itemList"></div>
+
+  <h2>Anna tavara henkilölle</h2>
+  <div id="assignSection">
+    <select id="assignItem"></select>
+    <select id="assignPerson"></select>
+    <button id="assignBtn">Anna</button>
+  </div>
+
+  <button id="resetBtn">Tyhjennä kaikki</button>
+
+  <!-- 🔹 Kalenterin avaamisen nappi -->
+  <div class="actions">
+    <button id="calendarBtn">📅 Avaa kalenteri</button>
+  </div>
+</div>
+
+<div id="right">
+  <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+    <h2>Kaikki tavarat</h2>
+    <div>
+      <label for="filterCategory">Kategoria: </label>
+      <select id="filterCategory">
+        <option value="">Kaikki</option>
+      </select>
+    </div>
+  </div>
+  <div id="rightItemList"></div>
+</div>
+
+<script src="app.js"></script>
+<script>
+  // Kalenterin avausnappi
+  document.getElementById("calendarBtn").addEventListener("click", () => {
+    window.location.href = "calendar.html";
+  });
+</script>
+<script>
+  (async () => {
+    const res = await fetch("/api/me");
+    if (!res.ok) {
+      window.location.href = "login.html";
+      return;
+    }
+    const me = await res.json();
+    // Piilota muokkausnapit ei-adminilta (UI-tason suojaus)
+    if (me.role !== "admin") {
+      // Poista/disable napit joita ei-user saa käyttää
+      const toDisable = [
+        "addPersonBtn","addItemBtn","assignBtn","resetBtn"
+      ];
+      toDisable.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { el.disabled = true; el.style.opacity = 0.6; el.title = "Vain admin"; }
+      });
+      // Lisäksi: poista dynaamiset Poista/Poista omistajuus -napit renderöinnissä app.js:ssä (jos haluat),
+      // mutta tärkeintä on, että BACKEND jo estää POST /api/data -kutsut ei-adminilta.
+    }
+  })();
+</script>
+<button id="logoutBtn" style="background:#666;color:#fff;border:none;border-radius:6px;padding:6px 10px; margin-top:10px;">Kirjaudu ulos</button>
+<script>
+  const lb = document.getElementById("logoutBtn");
+  if (lb) lb.addEventListener("click", async () => {
+    await fetch("/api/logout", { method: "POST" });
+    window.location.href = "login.html";
+  });
+</script>
+</body>
+</html>
